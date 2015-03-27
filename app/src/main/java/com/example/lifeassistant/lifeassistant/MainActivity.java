@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
         g.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, ToDo.class);
+                Intent intent = new Intent(MainActivity.this, ToDoActivity.class);
                MainActivity.this.startActivity(intent);
 
 
