@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+
 /**
  * Created by Computer on 25.3.2015..
  */
@@ -17,8 +18,11 @@ public class CategoriesAdapter extends BaseAdapter {
 
     CategoriesAdapter(Context ctxt, int resource, String[] Categories) {
         super();
+
         this.ctxt = ctxt;
         this.inflater = LayoutInflater.from(ctxt);
+
+
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -26,6 +30,7 @@ public class CategoriesAdapter extends BaseAdapter {
             convertView = this.inflater.inflate(R.layout.list_item_categories, null);
         }
         TextView textView = (TextView) convertView.findViewById(R.id.textView);
+
         textView.setText(Categories[position]);
         return convertView;
     }
@@ -46,6 +51,7 @@ public class CategoriesAdapter extends BaseAdapter {
     }
 
     static final String[] Categories = new String[]{"Shop list", "Homework", "Workout", "Other"};
+
 
 }
 
