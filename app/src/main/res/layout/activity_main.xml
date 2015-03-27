@@ -22,7 +22,8 @@
         android:horizontalSpacing="22dp"
         android:numColumns="auto_fit"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="35dp" />
+        android:verticalSpacing="35dp"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>
