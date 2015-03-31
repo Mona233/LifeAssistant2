@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.view.LayoutInflater;
 
 import java.util.ArrayList;
 
@@ -21,8 +20,8 @@ public class MainActivity extends ActionBarActivity {
 
     CategoriesAdapter categoriesAdapter;
 
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         GridView categoriesGridView = (GridView) findViewById(R.id.gridView);
 
@@ -38,31 +37,20 @@ public class MainActivity extends ActionBarActivity {
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
         actionBar.setIcon(R.mipmap.ic_launcher);
         categoriesGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, ToDoActivity.class);
                 MainActivity.this.startActivity(intent);
+            }
+        });
 
-                LayoutInflater li = LayoutInflater.from(MainActivity.this);
-                View promptsView = li.inflate(R.layout.prompt, null);
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
-                builder1.setMessage("Add category");
-                builder1.setCancelable(true);
-                builder1.setPositiveButton("Add",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-                        builder1.setNegativeButton("Cancel",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-
-                                AlertDialog alert11 = builder1.create();
-                alert11.show();
+        categoriesGridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                return false;
             }
         });
     }
@@ -70,7 +58,6 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
@@ -80,11 +67,29 @@ public class MainActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.action_add) {
-            EditText categoryNameEditText = (EditText) findViewById(R.id.etCategories);
-            categoriesAdapter.addCategory(categoryNameEditText.getText().toString());
+            showAddNewCategoryDialog();
         }
         return true;
     }
+
+    private void showAddNewCategoryDialog() {
+        View promptsView = getLayoutInflater().inflate(R.layout.prompt, null);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        dialogBuilder.setView(promptsView);
+        final EditText categoryNameEditText = (EditText) promptsView.findViewById(R.id.etUserInput);
+        dialogBuilder.setTitle(R.string.add_category);
+        dialogBuilder.setCancelable(true);
+        dialogBueilder.setPositiveButton(R.string.ok,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        categoriesAdapter.addCategory(categoryNameEditText.getText().toString());
+                        dialog.dismiss();
+                    }
+                });
+        dialogBuilder.setNegativeButton(R.string.cancel, null);
+        dialogBuilder.create().show();
+    }
+
 
 }
 
