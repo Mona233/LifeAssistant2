@@ -3,18 +3,20 @@ package com.example.lifeassistant.lifeassistant;
 /**
  * Created by Computer on 27.3.2015..
  */
+
 import android.os.Bundle;
-import android.app.Activity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.AdapterView.OnItemClickListener;
 
-public class ToDoActivity extends Activity {
+public class ToDoActivity extends ActionBarActivity {
 
     private EditText etName;
     private Button btnAdd;
@@ -41,6 +43,10 @@ public class ToDoActivity extends Activity {
 
         // field adapter postavi kao adapter objekta lvMain
         this.lvMain.setAdapter(this.adapter);
+        ActionBar actionBar = getSupportActionBar();
+        //actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
+        actionBar.setIcon(R.mipmap.ic_launcher);
 
         // OnClickListener je klasa koja se postavlja kako bi se obradio događaj klika na gumb
         // Sam događaj se obrađuje u njezinoj metodi onClick
@@ -56,6 +62,7 @@ public class ToDoActivity extends Activity {
                 adapter.add(item);
                 // brisanje teksta u Viewu etName
                 etName.setText("");
+
             }
         });
 

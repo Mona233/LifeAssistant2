@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/etName"
-        android:text="Dodaj" />
+        android:text="Add" />
 
     <ListView
         android:id="@+id/lvItems"
@@ -30,5 +30,9 @@
         android:paddingTop="30dp" >
 
     </ListView>
+
+
+
+
 
 </LinearLayout>
