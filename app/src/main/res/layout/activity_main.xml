@@ -23,6 +23,7 @@
         android:numColumns="auto_fit"
         android:stretchMode="columnWidth"
         android:verticalSpacing="35dp"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        />
 
 </RelativeLayout>

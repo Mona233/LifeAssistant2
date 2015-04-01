@@ -5,6 +5,16 @@
     android:layout_height="fill_parent"
     android:padding="10dp" >>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Add category"
+        android:textSize="18dp"
+        android:textColor="#000"
+        android:id="@+id/textView2"
+        />
+
     <EditText
         android:id="@+id/etUserInput"
         android:layout_width="match_parent"

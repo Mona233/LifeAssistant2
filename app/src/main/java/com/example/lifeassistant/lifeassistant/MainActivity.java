@@ -23,9 +23,9 @@ public class MainActivity extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        GridView categoriesGridView = (GridView) findViewById(R.id.gridView);
+        final GridView categoriesGridView = (GridView) findViewById(R.id.gridView);
 
-        ArrayList<String> dummyCategories = new ArrayList<>();
+        final ArrayList<String> dummyCategories = new ArrayList<>();
         dummyCategories.add("Shop list");
         dummyCategories.add("Homework");
         dummyCategories.add("Workout");
@@ -36,8 +36,8 @@ public class MainActivity extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
         actionBar.setIcon(R.mipmap.ic_launcher);
-        categoriesGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+        categoriesGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 
             @Override
@@ -49,12 +49,26 @@ public class MainActivity extends ActionBarActivity {
 
         categoriesGridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                return false;
+            public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
+                View promptsView = getLayoutInflater().inflate(R.layout.prompt2, null);
+
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
+                dialogBuilder.setView(promptsView);
+
+
+                dialogBuilder.setCancelable(true);
+                dialogBuilder.setPositiveButton(R.string.yes,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                categoriesAdapter.deleteCategory(position);
+                            }
+                        });
+                dialogBuilder.setNegativeButton(R.string.no, null);
+                dialogBuilder.create().show();
+                return true;
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,7 +80,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.action_add) {
+        if (id == R.id.action_add) {
             showAddNewCategoryDialog();
         }
         return true;
@@ -77,9 +91,8 @@ public class MainActivity extends ActionBarActivity {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
         dialogBuilder.setView(promptsView);
         final EditText categoryNameEditText = (EditText) promptsView.findViewById(R.id.etUserInput);
-        dialogBuilder.setTitle(R.string.add_category);
         dialogBuilder.setCancelable(true);
-        dialogBueilder.setPositiveButton(R.string.ok,
+        dialogBuilder.setPositiveButton(R.string.ok,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         categoriesAdapter.addCategory(categoryNameEditText.getText().toString());
@@ -92,5 +105,3 @@ public class MainActivity extends ActionBarActivity {
 
 
 }
-
-

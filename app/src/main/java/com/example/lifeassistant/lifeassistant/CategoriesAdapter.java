@@ -53,6 +53,9 @@ public class CategoriesAdapter extends BaseAdapter {
         categories.add(category);
         notifyDataSetChanged();
     }
-
+public  void deleteCategory(int category){
+    categories.remove(category);
+    notifyDataSetChanged();
+}
 }
 
