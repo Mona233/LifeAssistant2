@@ -5,11 +5,11 @@ package com.example.lifeassistant.lifeassistant;
  */
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -37,12 +37,19 @@ public class ToDoItemsAdapter extends ArrayAdapter<ToDo>{
 
         // dohvaćanje viewova (kontrola) TextView i ImageView iz instanciranog layouta
         TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
-        ImageView ivStatus = (ImageView) convertView.findViewById(R.id.ivStatus);
+
 
         // postavljanje teksta TextViewa na naziv zadatka
         tvName.setText(item.getName());
-        // postavljanje slike ImageViewa na ikonu zadatka
-        ivStatus.setImageDrawable(item.getIcon());
+        if(item.getFinished()) {
+            tvName.setPaintFlags(tvName.getPaintFlags()| (Paint.STRIKE_THRU_TEXT_FLAG));
+        }
+            else {
+            tvName.setPaintFlags(tvName.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
+
+        }
+
+
 
         // vraćanje pripremljenog Viewa
         return convertView;

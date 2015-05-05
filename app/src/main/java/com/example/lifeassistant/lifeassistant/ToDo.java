@@ -1,7 +1,6 @@
 package com.example.lifeassistant.lifeassistant;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 
 public class ToDo {
 
@@ -19,12 +18,7 @@ public class ToDo {
     public void setFinished (Boolean Value) { this.finished = Value; }
     public String getName () { return this.name; }
 
-    public Drawable getIcon ()
-    {
-        if (this.finished)
-            return this.context.getResources().getDrawable(R.drawable.ic_finished);
-        return this.context.getResources().getDrawable(R.drawable.ic_notfinished);
-    }
+
 }
 
 
