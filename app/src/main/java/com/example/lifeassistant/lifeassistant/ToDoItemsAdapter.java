@@ -55,4 +55,9 @@ public class ToDoItemsAdapter extends ArrayAdapter<ToDo>{
         return convertView;
     }
 
+    public  void deleteItem(int position){
+        ToDo todo = getItem(position);
+        remove(todo);
+        notifyDataSetChanged();
+    }
 }

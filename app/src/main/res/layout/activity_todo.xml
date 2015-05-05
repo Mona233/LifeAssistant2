@@ -17,7 +17,6 @@
             android:singleLine="true"
             android:maxLines="1"
             android:hint="@string/hint_add_todo">
-            <requestFocus />
         </EditText>
 
         <Button

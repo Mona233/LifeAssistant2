@@ -23,6 +23,7 @@ public class MainActivity extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         final GridView categoriesGridView = (GridView) findViewById(R.id.gridView);
 
         final ArrayList<String> dummyCategories = new ArrayList<>();
@@ -39,10 +40,13 @@ public class MainActivity extends ActionBarActivity {
 
         categoriesGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, ToDoActivity.class);
+                Intent i=new Intent(MainActivity.this, ToDoActivity.class);
+                i.putExtra("name", dummyCategories.get(position));
+                startActivity(i);
+
                 MainActivity.this.startActivity(intent);
             }
         });
