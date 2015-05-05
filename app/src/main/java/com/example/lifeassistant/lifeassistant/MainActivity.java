@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -99,7 +100,11 @@ public class MainActivity extends ActionBarActivity {
         dialogBuilder.setPositiveButton(R.string.ok,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        categoriesAdapter.addCategory(categoryNameEditText.getText().toString());
+                        String newCategoryName = categoryNameEditText.getText().toString();
+                        if (!newCategoryName.equals("")) {
+                            categoriesAdapter.addCategory(newCategoryName);
+                        } else
+                            Toast.makeText(getApplicationContext(),"Category name must not be empty!", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
                     }
                 });
