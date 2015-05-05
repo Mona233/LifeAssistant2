@@ -97,8 +97,10 @@ public class MainActivity extends ActionBarActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         String newCategoryName = categoryNameEditText.getText().toString();
-                        if(!newCategoryName.equals(""))
+                        if (!newCategoryName.equals("")) {
                             categoriesAdapter.addCategory(newCategoryName);
+                        } else
+                            Toast.makeText(getApplicationContext(),"Category name must not be empty!", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
                     }
                 });
