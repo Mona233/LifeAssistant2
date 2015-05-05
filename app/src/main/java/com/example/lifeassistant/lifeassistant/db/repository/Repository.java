@@ -2,13 +2,12 @@ package com.example.lifeassistant.lifeassistant.db.repository;
 
 import android.content.Context;
 
+import com.example.lifeassistant.lifeassistant.Data;
+import com.example.lifeassistant.lifeassistant.db.DBHelper;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
 import java.util.List;
-
-import hr.molekula.gorskikotarbike.db.DBHelper;
-import hr.molekula.gorskikotarbike.db.model.Data;
 
 public class Repository<T extends Data> {
 
