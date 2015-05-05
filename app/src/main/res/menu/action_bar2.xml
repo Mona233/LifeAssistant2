@@ -5,10 +5,14 @@
 
     tools:context=".ToDoActivity">
 
+
+
     <item
         android:id="@+id/action_calendar"
         android:icon="@drawable/white_event"
         android:title="Calendar"
         app:showAsAction="always" />
+
+
 
 </menu>
