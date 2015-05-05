@@ -5,9 +5,11 @@ package com.example.lifeassistant.lifeassistant;
  */
 
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -27,8 +29,7 @@ public class ToDoActivity extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.todo);
-
+        setContentView(R.layout.activity_todo);
         this.lvMain = (ListView) this.findViewById(R.id.lvItems);
         this.etName =(EditText) this.findViewById(R.id.etName);
         this.btnAdd =(Button) this.findViewById(R.id.btnAdd);
@@ -45,8 +46,9 @@ public class ToDoActivity extends ActionBarActivity {
         this.lvMain.setAdapter(this.adapter);
         ActionBar actionBar = getSupportActionBar();
         //actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
-        actionBar.setIcon(R.mipmap.ic_launcher);
+        //actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Bla kategorija");
 
         // OnClickListener je klasa koja se postavlja kako bi se obradio događaj klika na gumb
         // Sam događaj se obrađuje u njezinoj metodi onClick
@@ -94,5 +96,16 @@ public class ToDoActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.action_bar2, menu);
         return true;
+    }
+
+    public boolean onOptionsItemSelected (MenuItem item){
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 }

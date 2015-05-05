@@ -35,7 +35,7 @@ public class MainActivity extends ActionBarActivity {
         categoriesGridView.setAdapter(categoriesAdapter);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME);
         actionBar.setIcon(R.mipmap.ic_launcher);
 
         categoriesGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
