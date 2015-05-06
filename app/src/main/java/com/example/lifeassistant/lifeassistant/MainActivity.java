@@ -46,9 +46,11 @@ public class MainActivity extends ActionBarActivity {
                 Intent intent = new Intent(MainActivity.this, ToDoActivity.class);
                 Intent i=new Intent(MainActivity.this, ToDoActivity.class);
                 i.putExtra("name", dummyCategories.get(position));
-                startActivity(i);
+
 
                 MainActivity.this.startActivity(intent);
+                startActivity(i);
+
             }
         });
 

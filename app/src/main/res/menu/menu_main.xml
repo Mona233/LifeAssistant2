@@ -3,11 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
 
-    <item
-        android:id="@+id/action_calendar"
-        android:icon="@drawable/white_event"
-        android:title="Calendar"
-        app:showAsAction="always" />
+
     <item
         android:id="@+id/action_add"
         android:icon="@drawable/white_plus"
@@ -16,7 +12,7 @@
     <item
         android:id="@+id/settings"
         android:icon="@drawable/sett"
-        android:title="Calendar"
+        android:title="Settings"
         app:showAsAction="always" />
 
 
