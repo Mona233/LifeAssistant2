@@ -2,7 +2,7 @@ package com.example.lifeassistant.lifeassistant.db.repository;
 
 import android.content.Context;
 
-import com.example.lifeassistant.lifeassistant.Data;
+import com.example.lifeassistant.lifeassistant.db.model.Data;
 import com.example.lifeassistant.lifeassistant.db.DBHelper;
 import com.j256.ormlite.dao.Dao;
 

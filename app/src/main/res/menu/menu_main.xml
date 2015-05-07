@@ -9,12 +9,5 @@
         android:icon="@drawable/white_plus"
         android:title="@string/app_name"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/settings"
-        android:icon="@drawable/sett"
-        android:title="Settings"
-        app:showAsAction="always" />
-
-
 
 </menu>

@@ -9,11 +9,11 @@
     tools:context=".MainActivity">
 
 
-
     <GridView
         android:id="@+id/gridView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="46dp"
@@ -22,8 +22,6 @@
         android:horizontalSpacing="22dp"
         android:numColumns="auto_fit"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="35dp"
-        android:layout_alignParentEnd="true"
-        />
+        android:verticalSpacing="35dp" />
 
 </RelativeLayout>

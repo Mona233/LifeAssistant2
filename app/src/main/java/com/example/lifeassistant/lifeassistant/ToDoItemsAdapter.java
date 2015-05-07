@@ -12,52 +12,60 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.List;
+import com.example.lifeassistant.lifeassistant.db.model.ToDo;
+import com.example.lifeassistant.lifeassistant.db.repository.ToDosRepository;
 
-public class ToDoItemsAdapter extends ArrayAdapter<ToDo>{
+import java.util.ArrayList;
+
+public class ToDoItemsAdapter extends ArrayAdapter<ToDo> {
 
     LayoutInflater inflater;
+    int categoryId;
+    ToDosRepository toDosRepository;
 
-    public ToDoItemsAdapter(Context context, int textViewResourceId,
-                            List<ToDo> objects) {
-        super(context, textViewResourceId, objects);
+    public ToDoItemsAdapter(Context context, int textViewResourceId, ToDosRepository toDosRepository, int categoryId) {
+        super(context, textViewResourceId, new ArrayList<ToDo>());
+        this.categoryId = categoryId;
         this.inflater = LayoutInflater.from(context);
+        this.toDosRepository = toDosRepository;
+        addAll(toDosRepository.getByCategoryId(categoryId));
+        notifyDataSetChanged();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-        // Na temelju parametra position, dohvati element kolekcije kojeg treba prikazati
-        ToDo item = this.getItem(position);
-
-        // ako je convertView null, element se prikazuje prvi put
-        // u tom slučaju se instancira layout todoitemview pozivom metode inflate nad objektom tipa LayoutInflater
         if (convertView == null)
             convertView = this.inflater.inflate(R.layout.todoitemview, null);
 
-        // dohvaćanje viewova (kontrola) TextView i ImageView iz instanciranog layouta
         TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
-
-
-        // postavljanje teksta TextViewa na naziv zadatka
+        ToDo item = this.getItem(position);
         tvName.setText(item.getName());
-        if(item.getFinished()) {
-            tvName.setPaintFlags(tvName.getPaintFlags()| (Paint.STRIKE_THRU_TEXT_FLAG));
-        }
-            else {
-            tvName.setPaintFlags(tvName.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
-
+        if (item.isCompleted()) {
+            tvName.setPaintFlags(tvName.getPaintFlags() | (Paint.STRIKE_THRU_TEXT_FLAG));
+        } else {
+            tvName.setPaintFlags(tvName.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
         }
 
-
-
-        // vraćanje pripremljenog Viewa
         return convertView;
     }
 
-    public  void deleteItem(int position){
+    public void deleteItem(int position) {
         ToDo todo = getItem(position);
-        remove(todo);
+        super.remove(todo);
+        toDosRepository.delete(todo);
+    }
+
+    @Override
+    public void add(ToDo item) {
+        super.add(item);
+        toDosRepository.create(item);
+    }
+
+    public void updateIsComplete(int position) {
+        ToDo todo = getItem(position);
+        todo.setCompleted(!todo.isCompleted());
+        toDosRepository.update(todo);
         notifyDataSetChanged();
     }
+
 }

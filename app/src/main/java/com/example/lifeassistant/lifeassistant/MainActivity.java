@@ -15,7 +15,8 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.example.lifeassistant.lifeassistant.db.model.Category;
+import com.example.lifeassistant.lifeassistant.db.repository.CategoriesRepository;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -26,13 +27,8 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         final GridView categoriesGridView = (GridView) findViewById(R.id.gridView);
-
-        final ArrayList<String> dummyCategories = new ArrayList<>();
-        dummyCategories.add("Shop list");
-        dummyCategories.add("Homework");
-        dummyCategories.add("Workout");
-        dummyCategories.add("Other");
-        categoriesAdapter = new CategoriesAdapter(this, android.R.layout.simple_list_item_1, dummyCategories);
+        CategoriesRepository categoriesRepository = new CategoriesRepository(this);
+        categoriesAdapter = new CategoriesAdapter(this, android.R.layout.simple_list_item_1, categoriesRepository);
         categoriesGridView.setAdapter(categoriesAdapter);
 
         ActionBar actionBar = getSupportActionBar();
@@ -43,14 +39,11 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, ToDoActivity.class);
-                Intent i=new Intent(MainActivity.this, ToDoActivity.class);
-                i.putExtra("name", dummyCategories.get(position));
-
-
-                MainActivity.this.startActivity(intent);
+                Intent i = new Intent(MainActivity.this, ToDoActivity.class);
+                Category category = categoriesAdapter.getItem(position);
+                i.putExtra("name", category.getName());
+                i.putExtra("id", category.getId());
                 startActivity(i);
-
             }
         });
 
@@ -61,8 +54,6 @@ public class MainActivity extends ActionBarActivity {
 
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
                 dialogBuilder.setView(promptsView);
-
-
                 dialogBuilder.setCancelable(true);
                 dialogBuilder.setPositiveButton(R.string.yes,
                         new DialogInterface.OnClickListener() {
@@ -104,15 +95,14 @@ public class MainActivity extends ActionBarActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         String newCategoryName = categoryNameEditText.getText().toString();
                         if (!newCategoryName.equals("")) {
-                            categoriesAdapter.addCategory(newCategoryName);
+                            categoriesAdapter.addCategory(new Category(newCategoryName));
                         } else
-                            Toast.makeText(getApplicationContext(),"Category name must not be empty!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Category name must not be empty!", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
                     }
                 });
         dialogBuilder.setNegativeButton(R.string.cancel, null);
         dialogBuilder.create().show();
     }
-
 
 }
